@@ -4,7 +4,6 @@ package com.example.demo.api.controllers;
 import com.example.demo.api.models.ItemModel;
 import com.example.demo.api.responses.*;
 import com.example.demo.core.dal.models.Item;
-import com.example.demo.core.dal.repositories.ICatalogRepository;
 import com.example.demo.domain.services.impls.IItemService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,12 +14,10 @@ import java.util.stream.Collectors;
 
 @RestController
 public class ReadController {
-    private final ICatalogRepository catalogRepository;
     private final IItemService itemService;
 
 
-    public ReadController(ICatalogRepository catalogRepository, IItemService itemService) {
-        this.catalogRepository = catalogRepository;
+    public ReadController(IItemService itemService) {
         this.itemService = itemService;
     }
 

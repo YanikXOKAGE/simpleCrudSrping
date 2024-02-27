@@ -20,4 +20,7 @@ public interface IItemService {
     EErrorType deleteItem(Long itemId);
 
     EErrorType  addItemToCatalog(Long catalogId, ItemModel itemModel);
+
+    List<ItemModel> createItemModelList(List<Item> items);
+
 }

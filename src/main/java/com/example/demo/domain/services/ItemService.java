@@ -134,4 +134,16 @@ public class ItemService implements IItemService {
         return EErrorType.CATALOG_ID_NOT_FOUND;
 
     }
+
+    @Override
+    public List<ItemModel> createItemModelList(List<Item> items) {
+
+        return items.stream().map(item -> new ItemModel(
+                item.getItem_Id(),
+                item.getTitle(),
+                item.getLink(),
+                item.getDate()
+        )).collect(Collectors.toList());
+    }
 }
+

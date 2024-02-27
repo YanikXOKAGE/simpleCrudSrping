@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "catalogitemrelation")
+@Table(name = "catalog_item_relations")
 @Data
 public class CatalogItemRelation implements Serializable {
 

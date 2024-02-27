@@ -9,7 +9,8 @@ import java.util.List;
 
 @Entity
 @Data
-@ToString(exclude ="catalogItemRelations" )
+@ToString(exclude ="catalogItemRelations")
+@Table(name = "catalogs")
 public class Catalog {
 
     @Id

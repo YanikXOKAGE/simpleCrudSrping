@@ -7,6 +7,7 @@ import com.example.demo.api.responses.Response;
 import com.example.demo.core.enums.EErrorType;
 import com.example.demo.domain.services.impls.ICatalogService;
 import com.example.demo.domain.services.impls.IItemService;
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +33,7 @@ public class CreateController {
             @RequestParam String title,
             @RequestParam String link) {
 
-        long timeInMillis = org.joda.time.DateTime.now(DateTimeZone.UTC).getMillis();
+        long timeInMillis = DateTime.now(DateTimeZone.UTC).getMillis();
         ItemModel itemModel = new ItemModel(title, link, timeInMillis);
         EErrorType eErrorType = itemService.addItemToCatalog(catalogId, itemModel);
         if (eErrorType == EErrorType.SUCCESS) {

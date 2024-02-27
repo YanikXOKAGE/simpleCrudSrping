@@ -3,11 +3,8 @@ package com.example.demo.api.controllers;
 
 import com.example.demo.api.models.ItemModel;
 import com.example.demo.api.responses.*;
-import com.example.demo.core.dal.models.Catalog;
-import com.example.demo.core.dal.models.CatalogItemRelation;
 import com.example.demo.core.dal.models.Item;
 import com.example.demo.core.dal.repositories.ICatalogRepository;
-import com.example.demo.core.dal.repositories.IItemRepository;
 import com.example.demo.domain.services.impls.IItemService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

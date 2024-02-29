@@ -9,12 +9,15 @@ import com.example.demo.core.dal.repositories.IItemRepository;
 import com.example.demo.core.enums.EErrorType;
 import com.example.demo.core.utils.RepositoryHelper;
 import com.example.demo.domain.services.impls.ICatalogService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
+@Slf4j
 @Service
 public class CatalogService implements ICatalogService {
 
@@ -42,10 +45,14 @@ public class CatalogService implements ICatalogService {
             itemRepository.deleteAll(collect);
 
             catalogRepository.delete(catalog);
-            System.out.printf("CATALOG %s WAS DELETED", catalogId);
+
+            String msg = String.format("CATALOG %s WAS DELETED", catalogId);
+            log.info(msg);
+
             return EErrorType.SUCCESS;
         } else {
-            System.out.printf("CATALOG %s NOT FOUND", catalogId);
+            String msg = String.format("CATALOG %s NOT FOUND", catalogId);
+            log.info(msg);
             return EErrorType.CATALOG_ID_NOT_FOUND;
         }
 

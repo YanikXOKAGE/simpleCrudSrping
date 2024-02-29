@@ -6,6 +6,8 @@ import com.example.demo.api.responses.*;
 import com.example.demo.core.dal.models.Item;
 import com.example.demo.core.dal.repositories.IItemRepository;
 import com.example.demo.domain.services.impls.IItemService;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.common.util.impl.Log;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 
 @RestController
+@Slf4j
 public class ReadController {
     private final IItemService itemService;
     private final IItemRepository itemRepository;
@@ -31,12 +34,13 @@ public class ReadController {
 
         if (itemById == null) {
             String msg = String.format("Item with Id %s not found", itemId);
-            System.out.printf(msg);
+            log.info(msg);
             return new BadResponse(msg);
         }
 
         GetIemByIdResponse getIemByIdResponse = new GetIemByIdResponse(itemById.getItem_Id(), itemById.getTitle(), itemById.getLink(), itemById.getDate());
-        System.out.printf("We sent response %s", getIemByIdResponse);
+        String msg = String.format("We sent response %s", getIemByIdResponse);
+        log.info(msg);
 
         return getIemByIdResponse;
     }
@@ -49,7 +53,9 @@ public class ReadController {
         List<ItemModel> itemModelList = itemService.createItemModelList(items);
 
         GetAllItemsResponse getAllItemsResponse = new GetAllItemsResponse(itemModelList);
-        System.out.printf("We sent response %s", getAllItemsResponse);
+
+        String msg = String.format("We sent response %s", getAllItemsResponse);
+        log.info(msg);
 
         return getAllItemsResponse;
     }

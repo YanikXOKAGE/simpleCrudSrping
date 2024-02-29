@@ -10,6 +10,7 @@ import com.example.demo.core.dal.repositories.IItemRepository;
 import com.example.demo.core.enums.EErrorType;
 import com.example.demo.core.utils.RepositoryHelper;
 import com.example.demo.domain.services.impls.IItemService;
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 
+@Slf4j
 @Service
 public class ItemService implements IItemService {
 
@@ -56,7 +58,8 @@ public class ItemService implements IItemService {
 
         if (catalogId > allCatalog.size() || catalogId == 0) {
             String msg = String.format("Catalog with id %s not found", catalogId);
-            System.out.println(msg);
+            log.info(msg);
+
             return null;
         }
 
@@ -85,12 +88,14 @@ public class ItemService implements IItemService {
             item.setLink(newLink);
             item.setDate(DateTime.now().getMillis());
             itemRepository.save(item);
+            String msg = String.format("Item with itemId %s updated successfully.", itemId);
+            log.info(msg);
 
-            System.out.println("Item with itemId " + itemId + " updated successfully.");
             return EErrorType.SUCCESS;
 
         } else {
-            System.out.println("Item with itemId " + itemId + " not found.");
+            String msg = String.format("Item with itemId %s  not found.", itemId);
+            log.info(msg);
             return EErrorType.ITEM_ID_NOT_FOUND;
         }
     }
@@ -102,11 +107,13 @@ public class ItemService implements IItemService {
         if (itemToDelete != null) {
             itemToDelete.getCatalogItemRelations().clear();
             itemRepository.deleteByItemId(itemId);
-            System.out.printf("Item № %s was deleted", itemId);
+            String msg = String.format("Item № %s was deleted", itemId);
+            log.info(msg);
             return EErrorType.SUCCESS;
 
         } else {
-            System.out.printf("Item № %s not found", itemId);
+            String msg = String.format("Item № %s not found", itemId);
+            log.info(msg);
             return EErrorType.ITEM_ID_NOT_FOUND;
         }
     }
@@ -123,7 +130,6 @@ public class ItemService implements IItemService {
 
             Item savedItem = itemRepository.save(newItem);
             Long itemId = savedItem.getItem_Id();
-            System.out.println(itemId);
 
             int code = catalogRepository.addReletion(itemId, catalogId);
             if (RepositoryHelper.isSuccessAction(code)) {

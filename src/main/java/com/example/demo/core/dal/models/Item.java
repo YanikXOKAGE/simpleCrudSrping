@@ -21,7 +21,7 @@ public class Item {
     private String link;
     private Long date;
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
     private List<CatalogItemRelation> catalogItemRelations;
 
 

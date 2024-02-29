@@ -29,6 +29,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'mysql:mysql-connector-java:8.0.28'
 	implementation group: 'joda-time', name: 'joda-time', version: '2.10'
+	implementation 'org.slf4j:slf4j-api:1.7.32'
 }
 
 tasks.named('test') {
